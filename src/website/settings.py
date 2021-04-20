@@ -123,6 +123,35 @@ CKEDITOR_CONFIGS = {
     },
 }
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin': 'moono',
+        'width': '100%',
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Source', '-', 'Bold', 'Italic'],
+
+            {'name': 'paragraph', 'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-',
+                                            'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl',
+                                            'Language']},
+            {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
+            {'name': 'insert', 'items': [
+                'Image',  'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']},
+            '/',
+            {'name': 'styles', 'items': [
+                'Styles', 'Format', 'Font', 'FontSize']},
+            '/',
+            {'name': 'yourcustomtools', 'items': [
+                'CodeSnippet',
+            ]},
+        ],
+        'tabSpaces': 4,
+        'extraPlugins': ','.join([
+            'uploadimage',
+            'codesnippet',
+        ]),
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
