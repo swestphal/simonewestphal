@@ -7,6 +7,8 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+from ckeditor_uploader.fields import RichTextUploadingField
+
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -28,7 +30,8 @@ class Post (models.Model):
                                on_delete=models.CASCADE,
                                related_name='blog_posts')
 
-    body = models.TextField()
+    #body = models.TextField()
+    body = RichTextUploadingField(blank=True)
 
     publish = models.DateTimeField(default=timezone.now)
 
