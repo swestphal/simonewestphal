@@ -11,3 +11,8 @@ class PostAdmin(admin.ModelAdmin):
     raw_id_fields = ('author',)
     date_hierarchy = 'publish'
     ordering = ('status', 'publish')
+
+    class Media:
+        js = ('ckeditor.js',)
+        # do not write '/static/ckeditor.js' as Django automatically looks
+        # in the static folder
