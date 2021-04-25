@@ -21,24 +21,16 @@ class Post (models.Model):
         ('published', 'Published'),
     )
 
-    title = models.CharField(
-        max_length=250)
-
+    title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250, unique_for_date='publish')
-
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
                                related_name='blog_posts')
-
     #body = models.TextField()
     body = RichTextUploadingField(blank=True)
-
     publish = models.DateTimeField(default=timezone.now)
-
     created = models.DateTimeField(auto_now_add=True)
-
     updated = models.DateTimeField(auto_now=True)
-
     status = models.CharField(max_length=10,
                               choices=STATUS_CHOICES,
                               default='draft')
@@ -59,3 +51,23 @@ class Post (models.Model):
     objects = models.Manager()
 
     published = PublishedManager()
+
+
+class Comment(models.Model):
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name='comments')
+    # allows retrieving comment of post by comment.post / post.comments.all()
+    # else modelname_set / comment_set
+
+    name = models.CharField(max_lengt=80)
+    email = models.EmailField()
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    active = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('created',)
+
+    def __str__(self):
+        return f'Comment by {self.name} on {self.post}'
