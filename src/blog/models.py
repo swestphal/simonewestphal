@@ -37,10 +37,8 @@ class Post (models.Model):
 
     def get_absolute_url(self):
         return reverse('blog:post_detail',
-                       args=[self.publish.year,
-                             self.publish.month,
-                             self.publish.day,
-                             self.slug])
+                       args=[
+                           self.slug])
 
     class Meta:
         ordering = ('publish',)
@@ -59,7 +57,7 @@ class Comment(models.Model):
     # allows retrieving comment of post by comment.post / post.comments.all()
     # else modelname_set / comment_set
 
-    name = models.CharField(max_lengt=80)
+    name = models.CharField(max_length=80)
     email = models.EmailField()
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
