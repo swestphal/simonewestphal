@@ -1,92 +1,79 @@
-body { 
-    margin:0;
-    padding:0;
-    font-family:helvetica, sans-serif; 
+html {
+    height: 100%;
+    font-family: sans-serif;
+  }
+  body {
+    height: 100%;
+    overflow: hidden;
+    margin: 0px;
+    display: flex;
+  }
+  .column {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  #sidebar {
+    
+    width:25%;
+    flex-shrink: 0;
+    background-color: white;
+  }
+  #content {
+    background-color: #f3f3f3;
+  }
+  .top-left {
+    flex-shrink: 0;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+  }
+  .top-right {
+    display: inline-flex;
+    flex-shrink: 0;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+  }
+  .bottom {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+  }
+  ul{
+    display: inline-flex;
+    list-style: none;
+    margin: 0;
+  }
+  li{
+    margin-right: 20px;
+  }
+/*
+ font
+*/
+
+h1,.h1,h2,.h2,h3,.h3,h4,.h4  {
+    font-weight:400;
+    line-height:1.5;
+    -webkit-font-smoothing: antialiased;
 }
 
-a { 
-    color:#00abff;
-    text-decoration:none; 
+h3,.h3 {
+    font-size:30px;
+    margin-bottom:.3em;
 }
-
-h1 { 
-    font-weight:normal;
-    border-bottom:1px solid #bbb;
-    padding:0 0 10px 0;
+h5,.h5 {
+    font-size:13px;
 }
-
-h2 {
-    font-weight:normal;
-    margin:30px 0 0;
+p {
+    font-size:18px;
+    font-weight:300;
+    line-height:1.5;
+    -webkit-font-smoothing: antialiased;
 }
-
-#content { 
-    float:left;
-    width:60%;
-    padding:0 0 0 30px; 
-}
-
-#sidebar { 
-    float:right;
-    width:30%;
-    padding:10px;
-    background:#efefef; 
-    height:100%;
-}
-
-p.date { 
-    color:#ccc;
-    font-family: georgia, serif;
-    font-size: 12px;
-    font-style: italic; 
-}
-
-/* pagination */
-.pagination { 
-    margin:40px 0; 
-    font-weight:bold;
-}
-
-/* forms */
-label { 
-    float:left;
-    clear:both;
-    color:#333;
-    margin-bottom:4px; 
-}
-input, textarea { 
-    clear:both;
-    float:left;
-    margin:0 0 10px;
-    background:#ededed;
-    border:0;
-    padding:6px 10px;
-    font-size:12px;
-}
-input[type=submit] {
-    font-weight:bold;
-    background:#00abff;
-    color:#fff;
-    padding:10px 20px;
-    font-size:14px;
-    text-transform:uppercase; 
-}
-.errorlist { 
-    color:#cc0033;
-    float:left;
-    clear:both;
-    padding-left:10px; 
-}
-
-/* comments */
-.comment {
-    padding:10px;
-}
-.comment:nth-child(even) {
-    background:#efefef;
-}
-.comment .info {
-    font-weight:bold;
-    font-size:12px;
-    color:#666;
+/* 
+ sidebar
+*/
+#sidebar {
+    background:rgb(123 8 8 / 80%);
 }
