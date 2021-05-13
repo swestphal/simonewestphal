@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'tags',
-    'ckeditor',
-    'ckeditor_uploader',
+    #'ckeditor',
+    #'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -111,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+"""
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 CKEDITOR_CONFIGS = {
@@ -123,7 +123,8 @@ CKEDITOR_CONFIGS = {
             ]),
     },
 }
-
+"""
+"""
 CKEDITOR_CONFIGS = {
     'default': {
         'skin': 'moono',
@@ -153,6 +154,7 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+"""
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
