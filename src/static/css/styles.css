@@ -1,92 +1,156 @@
-body { 
-    margin:0;
-    padding:0;
-    font-family:helvetica, sans-serif; 
+html {
+    height: 100%;
+    font-family: sans-serif;
+  }
+  body {
+    height: 100%;
+    overflow: hidden;
+    margin: 0px;
+    display: flex;
+  }
+  .column {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  #sidebar {
+    
+    width:25%;
+    flex-shrink: 0;
+    background-color: white;
+  }
+  #content {
+    width:75%;
+    background-color: #f3f3f3;
+  }
+  #content.wrapper {
+    background-image:url('../img/bg.png');
+  }
+  .top-left {
+    flex-shrink: 0;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+  }
+  .top-right {
+    display: inline-flex;
+    flex-shrink: 0;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+  }
+  .bottom {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+  }
+  .content__main {
+    background-image:url('../img/bg.png');
+  }
+  ul{
+    display: inline-flex;
+    list-style: none;
+    margin: 0;
+  }
+  
+/*
+ font
+*/
+body,html {
+    font-family:'Montserrat';
+}
+h1,.h1,h2,.h2,h3,.h3,h4,.h4  {
+    font-weight:400;
+    line-height:1.5;
+    -webkit-font-smoothing: antialiased;
+    font-family:'Josefin Sans';
 }
 
-a { 
-    color:#00abff;
-    text-decoration:none; 
+h3,.h3 {
+    font-size:30px;
+    margin-bottom:.3em;
+}
+h5,.h5 {
+    font-size:13px;
+}
+p {
+    font-size:18px;
+    font-weight:300;
+    line-height:1.5;
+    -webkit-font-smoothing: antialiased;
+    
+}
+/* 
+ sidebar
+*/
+#sidebar {
+    background:rgb(123 8 8 / 80%);
+    
+}
+#sidebar .bottom {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+#sidebar .bottom::-webkit-scrollbar {
+    display: none;
+  }
+
+/*
+ avatar
+*/
+.avatar {
+    margin:1rem 0 2rem;
+}
+.avatar img{
+    margin:0 auto;
+    display: block;
+    max-width: 180px;
+    border-radius:50%;
 }
 
-h1 { 
-    font-weight:normal;
-    border-bottom:1px solid #bbb;
-    padding:0 0 10px 0;
+/*
+ navbar
+*/
+
+.nav__main {
+    display:block;
+    padding-left:0;
+}
+#sidebar .bottom {
+    background-image:linear-gradient(
+        0deg
+        , rgb(97 10 10 / 81%), rgb(97 10 10 / 81%)),url(../img/bg-sidebar.jpg);
 }
 
-h2 {
-    font-weight:normal;
-    margin:30px 0 0;
+.nav__main li a {
+    color:rgba(255,255,255,.6);
+    display:block;
+    padding: 0.75rem;
+    text-decoration:none;
+    transition: all 0.3s;
+    font-size:22px;
+    font-family:'Josefin Sans';
+    position: relative;
 }
 
-#content { 
-    float:left;
-    width:60%;
-    padding:0 0 0 30px; 
+.nav__main li a:hover,
+.nav__main li a:active,
+.nav__main li a.active {
+    color:rgba(255, 255, 255, 0.94);
+    padding-left:1rem;
+    
 }
 
-#sidebar { 
-    float:right;
-    width:30%;
-    padding:10px;
-    background:#efefef; 
-    height:100%;
-}
-
-p.date { 
-    color:#ccc;
-    font-family: georgia, serif;
-    font-size: 12px;
-    font-style: italic; 
-}
-
-/* pagination */
-.pagination { 
-    margin:40px 0; 
-    font-weight:bold;
-}
-
-/* forms */
-label { 
-    float:left;
-    clear:both;
-    color:#333;
-    margin-bottom:4px; 
-}
-input, textarea { 
-    clear:both;
-    float:left;
-    margin:0 0 10px;
-    background:#ededed;
-    border:0;
-    padding:6px 10px;
-    font-size:12px;
-}
-input[type=submit] {
-    font-weight:bold;
-    background:#00abff;
-    color:#fff;
-    padding:10px 20px;
-    font-size:14px;
-    text-transform:uppercase; 
-}
-.errorlist { 
-    color:#cc0033;
-    float:left;
-    clear:both;
-    padding-left:10px; 
-}
-
-/* comments */
-.comment {
-    padding:10px;
-}
-.comment:nth-child(even) {
-    background:#efefef;
-}
-.comment .info {
-    font-weight:bold;
-    font-size:12px;
-    color:#666;
+.nav__main li a.active:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 11px solid transparent;
+    border-bottom: 11px solid transparent;
+    border-right: 11px solid #fff;
+    bottom: 12px;
+    left: auto;
+    right: -20px;
 }

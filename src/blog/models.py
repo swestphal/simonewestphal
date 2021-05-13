@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-
+from django.db.models import Count
 from ckeditor_uploader.fields import RichTextUploadingField
 
 
@@ -34,9 +34,9 @@ class Post (models.Model):
     status = models.CharField(max_length=10,
                               choices=STATUS_CHOICES,
                               default='draft')
-
+    tags = models.ManyToManyField('tags.Tag', related_name="posts")
     def get_absolute_url(self):
-        return reverse('blog:post_detail',
+        return reverse('blog:post-detail',
                        args=[
                            self.slug])
 

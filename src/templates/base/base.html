@@ -1,21 +1,89 @@
 {% load static %}
+{% load blog_tags %}
 <!DOCTYPE html>
 <html>
 
     <head>
         <title>{% block title %}{% endblock %}</title>
+        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Montserrat&display=swap" rel="stylesheet">
         <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+
     </head>
+    <link rel="stylesheet" href="{% static '/css/materialdesignicons.min.css'%}">
 
     <body>
-        <div id="content">
-            {% block content %}
-            {% endblock %}
+        <div id="sidebar" class="column">
+            <div class="top-left">top left</div>
+                <div class="bottom">
+                    <div class="avatar">
+                        <img src="{%static 'img/sw.jpg'%}">
+                    </div>
+                    <ul class="nav__main">
+                        <li class="bold">
+                            <a aria-label="" href="#about" class="">
+                                <span class="mdi mdi-share-variant-outline">
+                                </span><span>About</span>
+                            </a>
+                        </li>
+                        <li class="bold">
+                            <a aria-label="" href="#about" class="">
+                                <span class="mdi mdi-trending-up">
+                                </span><span>Experience</span></a>
+                            </li>
+                        <li class="bold">
+                            <a aria-label="" href="#about" class="">
+                                <span class="mdi mdi-equalizer">
+                                </span><span>Skills</span></a>
+                        </li>
+                        <li class="bold">
+                            <a aria-label="" href="#about" class="">
+                                <span class="mdi mdi-monitor-cellphone">
+                                </span><span>Projects</span>
+                            </a>
+                        </li>
+                        <li class="bold">
+                            <a aria-label="" href="#about" class="">
+                                <span class="mdi mdi-email-outline">
+                                </span><span>Contact</span>
+                            </a>
+                        </li>
+                        
+                        <li class="bold">
+                            <a aria-label="" href="{%url 'blog:post-list'%}" class="{% if 'blog' in request.path %}active{%endif%}">
+                                <span class="mdi mdi-newspaper-variant-outline">
+                                </span><span>Blog</span>
+                            </a>
+                        </li>
+                        <li class="bold">
+                            <a aria-label="" href="#about" class="">
+                                <span class="mdi mdi-school-outline">
+                                </span><span>Education</span>
+                            </a>
+                        </li>
+                        <li class="bold">
+                            <a aria-label="" href="#about" class="">
+                                <span class="mdi mdi-share-variant-outline">
+                                </span><span>Resume</span>
+                            </a>
+                        </li>
+                    </ul>
+                    {% show_latest_posts 3 %}
+              </div>
+
         </div>
-        <div id="sidebar">
-            <h2>My blog</h2>
-            <p>This is my blog.</p>
+        <div id="content" class="column">
+            <div class="top-right">top right</div>
+            <div class="bottom">
+                <div class="content__main">
+                   
+                {% block content %}
+                {% endblock %}
+                </div>
+            </div>
         </div>
     </body>
 
 </html>
+
+
+   

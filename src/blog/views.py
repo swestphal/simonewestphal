@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 from .models import Post
 from tags.models import Tag
 from .forms import EmailPostForm, CommentForm
+from django.db.models import Count
 
 
 def post_share(request, post_id):
@@ -38,57 +39,22 @@ class PostListView(ListView):
     model = Post
 
 
-class PostDetailView(DetailView):
-    context_object_name = 'post'
-    template_name = 'post/detail.html'
 
-
-# see here
-def get_object(self):
-    qs = Order.objects.by_request(self.request).filter(
-        order_id=self.kwargs.get('order_id'))
-    if qs.count() == 1:
-        return qs.first()
-    raise Http404
-
-    # end seehere
-
-
-def get_object(self, *args, **kwargs):
-    #     request = self.request
-    #     slug = self.kwargs.get('post')
-    #     return slug
-    return Post.objects.get(slug=self.kwargs.get('post'))
-
-# def post_list(request):
-#     object_list = Post.published.all()
-#     paginator = Paginator(object_list, 1)  # 1 posts in each page
-#     page = request.GET.get('page')
-#     try:
-#         posts = paginator.page(page)
-#     except PageNotAnInteger:
-#         # If page is not an integer deliver the first page
-#         posts = paginator.page(1)
-#     except EmptyPage:
-#         # If page is out of range deliver last page of results
-#         posts = paginator.page(paginator.num_pages)
-#     print(page)
-#     return render(request,
-#                   'post/list.html',
-#                   {'page': page,
-#                    'posts': posts})
-
-
-# outdated
 def post_detail(request, post):
     post = get_object_or_404(Post, slug=post,
                              status='published')
 
     # post.comments because of related_name in comment model
     comments = post.comments.filter(active=True)
-
-    tags = Tag.objects.get_tags_of_post(post.id)
-
+    post_tags = post.tags.all()
+    # get ids of tags ->flat=True single values instead of tuples
+    post_tags_ids = post.tags.values_list('id',flat=True)
+    # get posts that contains these tags except the current
+    similar_posts = Post.published.filter(tags__in=post_tags_ids).exclude(id=post.id)
+    # generate a calculated field, that count number of tags shared
+    # and retrieve the first four posts
+    similar_posts=similar_posts.annotate(same_tags=Count('tags')).order_by('-same_tags','publish')[:4]
+    
     new_comment = None
 
     if request.method == 'POST':
@@ -107,7 +73,8 @@ def post_detail(request, post):
     return render(request,
                   'post/detail.html',
                   {'post': post,
-                   'tags': tags,
+                   'tags': post_tags,
                    'comments': comments,
                    'new_comment': new_comment,
-                   'comment_form': comment_form})
+                   'comment_form': comment_form,
+                   'similar_posts':similar_posts})

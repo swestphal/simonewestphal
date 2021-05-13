@@ -4,12 +4,14 @@
 
 {% block content %}
 <h1>My Blog</h1>
-<h1>Tags</h1>
-{% for tag in tags %}
+{% if not tag_found %}
+<h1>This tag doesn't exist. But here are all blog posts</h1>
+{%endif%}
+{% for post in posts %}
 <h2>
-
+<h1>posttitle</h1>
     <a href="{{ tag.get_absolute_url }}">
-        {{ tag.title }}
+        {{ post.title }}
     </a>
 </h2>
 
