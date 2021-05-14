@@ -24,7 +24,8 @@ There are {% total_posts %} posts
 <p class="date">
     Published {{ post.publish }} by {{ post.author }}
 </p>
-{{ post.body|truncatewords:30|linebreaks }}
+
+
 <p>{{ post.body|safe }}</p>
 {% endfor %}
 {% include "base/pagination.html" with page=page_obj %}

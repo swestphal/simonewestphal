@@ -15,8 +15,4 @@ class TagAdmin(admin.ModelAdmin):
     model = Tag
     
 
-
-
-
-
 admin.site.register(Tag,TagAdmin)

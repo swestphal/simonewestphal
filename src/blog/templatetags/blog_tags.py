@@ -1,7 +1,9 @@
 from django import template
 from django.db.models import Count
+from django.utils.safestring import mark_safe
 from ..models import Post
-
+import markdown
+from pygments import highlight
 register = template.Library()
 
 @register.simple_tag
@@ -18,3 +20,12 @@ def show_latest_posts(count=5):
 @register.simple_tag
 def get_most_commented_posts(count=5):
     return Post.published.annotate(total_comments=Count('comments')).order_by('-total_comments')[:count]
+
+
+@register.filter(name='markdown')
+def markdown_format(text):
+    return mark_safe(markdown.markdown(text,extensions=[
+                                      'markdown.extensions.extra',
+                                      'markdown.extensions.codehilite',
+                                      'markdown.extensions.toc',
+                                  ]))

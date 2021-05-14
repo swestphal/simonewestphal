@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'tags',
+    'django_pygments',
+ 
     #'ckeditor',
     #'ckeditor_uploader',
 ]
