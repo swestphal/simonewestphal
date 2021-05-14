@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'blog',
     'tags',
     'django_pygments',
+    'django.contrib.postgres'
     
     #'ckeditor',
     #'ckeditor_uploader',
@@ -84,8 +85,10 @@ WSGI_APPLICATION = 'website.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'simonewestphal',
+        'USER': 'blog',
+        'PASSWORD':'Mar!e'
     }
 }
 

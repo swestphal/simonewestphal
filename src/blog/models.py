@@ -34,7 +34,7 @@ class Post (models.Model):
     status = models.CharField(max_length=10,
                               choices=STATUS_CHOICES,
                               default='draft')
-    tags = models.ManyToManyField('tags.Tag', related_name="posts")
+    tags = models.ManyToManyField('tags.Tag', related_name="posts",blank=True)
     def get_absolute_url(self):
         return reverse('blog:post-detail',
                        args=[

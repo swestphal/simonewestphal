@@ -32,7 +32,7 @@ class Tag(models.Model):
     #blogarticle = models.ManyToManyField(
      #   'self')
     post = models.ForeignKey(
-        "blog.Post", blank=True, on_delete=models.DO_NOTHING ,related_name='tags_of_posts')
+        "blog.Post", blank=True, on_delete=models.DO_NOTHING ,related_name='tags_of_posts',null=True)
   
     def __str__(self):
         return self.title

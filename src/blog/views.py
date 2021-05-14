@@ -4,9 +4,9 @@ from django.views.generic import ListView, DetailView
 from django.core.mail import send_mail
 from .models import Post
 from tags.models import Tag
-from .forms import EmailPostForm, CommentForm
+from .forms import EmailPostForm, CommentForm, SearchForm
 from django.db.models import Count
-
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 
 def post_share(request, post_id):
     post = get_object_or_404(Post, id=post_id, status='published')
@@ -30,6 +30,25 @@ def post_share(request, post_id):
                                                'form': form,
                                                'sent': sent})
 
+def post_search(request):
+    form = SearchForm()
+    query=SearchForm()
+    query=None
+    results=[]
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            search_vector=SearchVector('title',weight='A')+SearchVector('body',weight='B')
+            search_query=SearchQuery(query)
+            #results=Post.published.annotate( search=SearchVector('title','body'),).filter(search=query)
+            results=Post.published.annotate( search=search_vector, rank=SearchRank(search_vector,search_query),).filter(rank__gte=0.3).order_by('-rank')
+            print(results)
+
+    return render(request,'post/search.html',{
+        'form':form,
+        'query':query,
+        'results':results})
 
 class PostListView(ListView):
     # queryset = Post.published.all()
